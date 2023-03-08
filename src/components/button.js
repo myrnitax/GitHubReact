@@ -12,7 +12,7 @@ align-items: center; //centrado en altura
 font: var(--button);
 justify-content:center; //centrado dentro del boton
 cursor: pointer;
-border-radius: 0.5rem; //bordes redondesados
+border-radius: 0.5rem; //bordes redondeados
 padding-block: .25rem; //margen de arriba
 text-decoration: none !important;
 &:hover {
@@ -38,5 +38,15 @@ function Button({text, link, className, icon}) {
         </ButtonStyled>
     )
 }
+
+export const ButtonContrast = styled(Button)`
+    background: var(--white);
+    color: var(--buttonBG);
+    &:hover{
+        background: var(--buttonBG);
+        color: var(--white);
+    }
+`
+
 
 export default Button
