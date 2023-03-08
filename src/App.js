@@ -3,52 +3,43 @@ import Profile from "./components/profile";
 import Filters from "./components/filters";
 import RepoList from "./components/repo-list";
 import Search from "./components/search";
-import repoData  from "./components/repo-data";
+// import repoData  from "./components/repo-data";
 import { useState, useEffect } from "react";
 import { getUser, getRepos } from "./services/users";
-
-
-// const repoList = [
-//   {
-//   name: "Mi primer proyecto con React",
-//   id: 111,
-// },
-// {
-//   name: "Mi segundo proyecto con React",
-//   id: 112,
-// }
-// ]
+import {useParams} from 'react-router-dom'
 
 function App() {
+  const params = useParams()
+  let username = params.user
+  if (!username) {
+    username = 'myrnitax'
+  }
   const [user, setUser] = useState({})
   const [repos, setRepos] = useState([])
   useEffect(() => {
-    getUser('myrnitax').then(({ data, isError }) => {
+    getUser(username).then(({ data, isError }) => {
       if (isError) {
         console.log('no hemos encontrado a este crack')
         return
       }
       setUser(data)
     })
-
-  }, [])
-  useEffect(() => {
-    getRepos('myrnitax').then(({ data, isError }) => {
+    getRepos(username).then(({ data, isError }) => {
       if (isError) {
         console.log('no hemos encontrado los repos de este crack')
         return
       }
       setRepos(data)
     })
-  }, [])
+  }, [username])
   return (
     <Layout>
       <Profile {...user}/>
       <Filters />
-      <RepoList repoList={repos}/>
+      <RepoList repoList={repos} />
       <Search />
     </Layout>
-  );
+  )
 }
 
 export default App;
