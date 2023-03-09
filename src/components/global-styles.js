@@ -27,10 +27,11 @@ const GlobalStylesStyled = createGlobalStyle`
 }
 
 body {
-    border: 10px solid palegoldenrod;
+    ${'' /* border: 10px solid palegoldenrod; */}
     background: var(--bg);
     color: var(--grey);
     font: var(--body1-regular);
+    margin: 0;
 }
 `
 
