@@ -35,7 +35,16 @@ const ProfileStyled = styled.div`
     display: flex;
     align-items: center;
     gap: .5rem;
-    margin-block: 1rem;
+    margin-bottom: 1rem;
+    font: var(--body2-semi-bold);
+  }
+  .twitter {
+    color: var(--grey-1);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 0;
     font: var(--body2-semi-bold);
   }
   a:hover {
@@ -85,7 +94,7 @@ function Profile(props) {
       <p className="location info">
         • {location}
       </p>
-      <a className="info" href={blog} target="_blank" rel="noreferrer">
+      <a className="info" href={blog} target="_blank" rel="noreferrer"> --Blog en construcción--
         {blog}
       </a>
       <a className="info" href={`https://twitter.com/${twitter_username}`} target="_blank" rel="noreferrer">

@@ -59,7 +59,6 @@ border-block-end: 1px solid var(--grey);
 }
 `
 
-
 function RepoItem(props) {
     const updatedAt = new Date(props.updated_at) //convirtiendo la fecha en dias restantes hasya hoy
     const today = new Date() //fecha de hoy

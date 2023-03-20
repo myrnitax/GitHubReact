@@ -20,11 +20,12 @@ export default {
     "name": "Myrna Alvarado",
     "company": null,
     "blog": "https://malvaradoalburua",
-    "location": "Salou, Catalunya, Spain",
+    "location": "",
     "email": null,
     "hireable": null,
     "bio": "🍔",
-    "twitter_username": "acida29", //no lleva el arroba aqui, si se le coloca no funciona
+    "twitter_username": "XXXXS", //no lleva el arroba aqui, si se le coloca no funciona
+    "instagram_username": "myrnitax", //no lleva el arroba aqui, si se le coloca no funciona
     "public_repos": 107,
     "public_gists": 273,
     "followers": 21592,

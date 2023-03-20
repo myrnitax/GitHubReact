@@ -13,7 +13,6 @@ import Star from './star'
 import Twitter from './twitter'
 import User from './user'
 
-
 function Index({name, ...props}) {
     switch (name) {
         case "arrowDown": {

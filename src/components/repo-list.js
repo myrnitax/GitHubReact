@@ -13,7 +13,7 @@ function RepoList({ repoList, search }) {
   let list = repoList
   if (search !== '') {
     list = list.filter((item) => {
-      return item.name.search(search) >= 0
+      return item.name.toLowerCase().search(search.toLowerCase()) >= 0
     })
   }
   return (

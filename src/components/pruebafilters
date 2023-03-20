@@ -1,0 +1,136 @@
+import styled from 'styled-components'
+import InputText from './input-text'
+import Separator from './separator'
+import {useState, useEffect} from 'react'
+
+const FiltersStyled = styled.div`
+  grid-area: filters;
+  .count {
+    font: var(--headline2-semi-bold);
+    color: var(--white);
+    margin-block-end: 1.5rem;
+  }
+  .action-list {
+    display: flex;
+    gap: 1rem;
+  }
+  .select-list {
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+  }
+  .type-filter  {
+    border: red;
+    background: var(--button-bg);
+    color: var(--white);
+    padding-inline: 1rem;
+  }
+  .type-Language {
+    border: red;
+    background: var(--button-bg);
+    color: var(--white);
+    padding-inline: 1rem;
+
+  }
+  .Type-Sort {
+    border: red;
+    background: var(--button-bg);
+    color: var(--white);
+    padding-inline: 1rem;
+
+  }
+`
+const typeOptions = [
+  { value: "Select Type", label: "Select Type" },
+  { value: "All", label: "All" },
+  { value: "Sources", label: "Sources" },
+  { value: "Forks", label: "Forks" },
+  { value: "Archived", label: "Archived" },
+  { value: "Mirror", label: "Mirror" },
+];
+
+const languageOptions = [
+  { value: "Select language", label: "Select language" },
+  { value: "", label: "" },
+  { value: "all", label: "all" },
+  { value: "html", label: "html" },
+  { value: "css", label: "css" },
+  { value: "javascript", label: "javascript" },
+];
+
+const sortOptions = [
+  { value: "", label: "Select Order" },
+  { value: "all", label: "all" },
+  { value: "stars", label: "stars" },
+  { value: "last_updated", label: "Last Updated" },
+  { value: "forks", label: "Forks" },
+];
+
+function Filters({ setRepositories, repoListCount }) {
+  
+  const [typeFilter, setTypeFilter] = useState('')
+  const [languageFilter, setLanguageFilter] = useState('')
+  const [sortFilter, setSortFilter] = useState('')
+  const [search, setSearch] = useState('')
+  
+  useEffect(() => {
+    const apiUrl = `https://api.github.com/search/repositories?q=${encodeURIComponent(
+      search
+    )}${typeFilter !== 'all' ? `+type:${typeFilter.toLowerCase()}` : ''}${
+      languageFilter !== 'all' ? `+language:${languageFilter.toLowerCase()}` : ''
+    }${sortFilter !== 'all' ? `&sort=${sortFilter.toLowerCase()}` : ''}`
+
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => setRepositories(data.items))
+      .catch((error) => console.error('Error fetching repositories', error))
+  }, [search, typeFilter, languageFilter, sortFilter, setRepositories])
+
+  return (
+    <FiltersStyled>
+      <h2 className="count">
+        Repositorios {repoListCount}
+      </h2>
+      <div className="action-list">
+        <InputText
+          placeholder="Busca un repositorio"
+          type="search"
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <div className="select-list">
+        <div>
+          <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)}>
+            {typeOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <select value={languageFilter} onChange={(e) => setLanguageFilter(e.target.value)}>
+            {languageOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <select value={sortFilter} onChange={(e) => setSortFilter(e.target.value)}>
+            {sortOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
+        </div>
+      </div>
+      <Separator />
+    </FiltersStyled>
+  );
+
+}
+
+export default Filters

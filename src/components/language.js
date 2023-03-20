@@ -17,7 +17,7 @@ align-items: center;
 
 const languanges= {
     ruby:{
-        color: 'red'
+        color: 'blue'
     },
     css:{
         color: 'green'

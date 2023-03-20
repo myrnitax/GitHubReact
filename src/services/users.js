@@ -15,10 +15,12 @@ async function fetchWrapper(url, options){
     }
 }
 
-
 export async function getUser(username){
     return fetchWrapper(`${BASE_API}/users/${username}`)
 }
 export async function getRepos(username){
     return fetchWrapper(`${BASE_API}/users/${username}/repos`)
 }
+
+
+//https://api.github.com/users/leonidasesteban
