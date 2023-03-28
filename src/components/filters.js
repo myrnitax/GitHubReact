@@ -20,6 +20,12 @@ const FiltersStyled = styled.div`
     gap: .5rem;
     align-items: center;
   }
+  .typeFilter, .typeLanguage, .TypeSort {
+    border: none;
+  background: var(--button-bg);
+  color: var(--white);
+  padding-inline: 1rem;
+  }
 `
 
 function Filters({ repoListCount, setSearch, setLanguageFilter, setTypeFilter, setSortFilter }) {
