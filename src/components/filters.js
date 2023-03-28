@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import InputText from './input-text'
 import Separator from './separator'
 import {useState, useEffect} from 'react'
-import Selector from './elselector'
 
 
 const FiltersStyled = styled.div`
@@ -21,13 +20,9 @@ const FiltersStyled = styled.div`
     gap: .5rem;
     align-items: center;
   }
-
 `
 
-function Filters({ repoListCount, setSearch }) {
-  const [typeFilter, setTypeFilter] = useState('');
-  const [languageFilter, setLanguageFilter] = useState('');
-  const [sortFilter, setSortFilter] = useState('');
+function Filters({ repoListCount, setSearch, setLanguageFilter, setTypeFilter, setSortFilter }) {
 
   function handleChange(event) {
     setSearch(event.target.value);
@@ -45,42 +40,34 @@ function Filters({ repoListCount, setSearch }) {
           onChange={handleChange}
         />
         <div className="select-list">
-          <div>
-            <Selector className='typeFilter'
+            <select className='typeFilter'
               title='typeFilter'
-              value={typeFilter}
               onChange={(e) => setTypeFilter(e.target.value)}>
               <option value="all">Select Type</option>
-              <option value="Sources">Sources</option>
               <option value="Forks">Forks</option>
               <option value="Archived">Archived</option>
-              <option value="Mirror">Mirror</option>
-            </Selector>
-          </div>
-          <div>
-            <Selector className='typeLanguage'
+              <option value="mirror_url">Mirror</option>
+            </select>
+          
+            <select className='typeLanguage'
               title='languageFilter' 
-              value={languageFilter}
               onChange={(e) => setLanguageFilter(e.target.value)}>
               <option value="">Select language</option>
               <option value="all">all</option>
               <option value="html">html</option>
               <option value="css">css</option>
               <option value="javascript">javascript</option>
-            </Selector>
-          </div>
-          <div>
-            <Selector className='TypeSort' 
+            </select>
+          
+            <select className='TypeSort' 
               title='sortFilter' 
-              value={sortFilter}
               onChange={(e) => setSortFilter(e.target.value)}>
               <option value="">Select Order</option>
               <option value="all">all</option>
-              <option value="stars">stars</option>
-              <option value="last_updated">Last Updated</option>
-              <option value="forks">Forks</option>
-            </Selector>
-          </div>
+              <option value="stargazers_count">stars</option> */esto se saco del api: "stargazers_count" /*
+              <option value="updated_at">Last Updated</option> * /esto se saco del api: "updated_at" /*
+              <option value="forks_count">Forks</option>
+            </select>          
         </div>
       </div>
       <Separator />

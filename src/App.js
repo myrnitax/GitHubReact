@@ -7,7 +7,6 @@ import { useState, useEffect } from 'react'
 import { getUser, getRepos, } from './services/users'
 import { useParams } from 'react-router-dom'
 import Modal from './modal'
-import Selector from './components/elselector';
 
 function App() {
   const params = useParams()
@@ -19,6 +18,9 @@ function App() {
   const [repos, setRepos] = useState([])
   const [modal, setModal] = useState(false)
   const [search, setSearch] = useState('')
+  const [typeFilter, setTypeFilter] = useState(''); //se uso el prop y el children y tambien se uso en los archivos repo-list y en filters
+  const [languageFilter, setLanguageFilter] = useState('');
+  const [sortFilter, setSortFilter] = useState('');
   useEffect(() => {
     getUser(username).then(({ data, isError }) => {
       if (isError) {
@@ -40,8 +42,9 @@ function App() {
     <Layout>
       <Modal isActive={modal} setModal={setModal} />
       <Profile {...user} />
-      <Filters setSearch={setSearch} repoListCount={repos.length}/>
-      <RepoList search={search} repoList={repos} />
+      <Filters setSearch={setSearch} repoListCount={repos.length} setTypeFilter={setTypeFilter} 
+      setLanguageFilter={setLanguageFilter} setSortFilter={setSortFilter}/>
+      <RepoList search={search} repoList={repos} typeFilter={typeFilter} languageFilter={languageFilter} sortFilter={sortFilter} />
       <Search setModal={setModal} />
     </Layout>
   )
